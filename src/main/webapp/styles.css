@@ -1,0 +1,35 @@
+body {
+	max-width: 500px;
+	margin: auto;
+}
+
+table {
+	font-size:  1.2em;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 0px 10px;
+	text-align: left;	
+}
+
+th {
+	background-color: #5F9EA0;
+	color: #F0FFFF;
+}
+
+#haku {
+	text-align: right;
+}
+
+tr {
+	height: 55px;
+}
+
+tr:nth-child(2n+2) {
+	background-color: #e8e8ff;
+}
+
+td {
+	
+}
