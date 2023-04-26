@@ -1,16 +1,11 @@
-body {
-	max-width: 500px;
-	margin: auto;
-}
-
 table {
 	font-size:  1.2em;
+	border-collapse: collapse;
 }
 
 th, td {
 	border: 1px solid #ddd;
 	padding: 0px 10px;
-	text-align: left;	
 }
 
 th {
@@ -18,8 +13,19 @@ th {
 	color: #F0FFFF;
 }
 
-#haku {
+.oikealle {
 	text-align: right;
+}
+
+#linkki {
+	color: white;
+	text-decoration: none;
+}
+
+.poista {
+	color: blue;
+	text-decoration: underline blink;
+	cursor: pointer;
 }
 
 tr {

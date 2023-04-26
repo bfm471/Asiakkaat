@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="scripts/main.js"></script>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 <title>Listaa asiakkaat</title>
 </head>
 <body>
@@ -13,9 +13,12 @@
 <table id="listaus">
 	<thead>
 		<tr>
-		<th colspan=2 id="haku">Hakusana</th>
+			<th colspan="5" class="oikealle"><a id="linkki" href="lisaaasiakas.jsp">Lisää uusi asiakas</a>
+		</tr>
+		<tr>
+		<th colspan="2" class="oikealle">Hakusana</th>
 		<th><input type="text" id="hakusana"></th>
-		<th><input type="button" value="Hae" onclick="haeAsiakkaat()"></th>
+		<th colspan="2"><input type="button" value="Hae" onclick="haeAsiakkaat()"></th>
 		</tr>
 		
 		<tr>
@@ -23,6 +26,7 @@
 			<th>Sukunimi</th>
 			<th>Puhelin</th>
 			<th>Sposti</th>
+			<th>&nbsp</th>
 		</tr>
 	</thead>
 	<tbody id="tbody">
