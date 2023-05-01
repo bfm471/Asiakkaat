@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <script src="scripts/main.js"></script>
-<link rel="stylesheet" href="css/styles.css">
-<title>Listaa asiakkaat</title>
+<script src="scripts/io.js"></script>
+<link rel="stylesheet" href="css/main.css">
+<title>Asiakaslistaus</title>
 </head>
-<body>
+<body onload="asetaFocus('hakusana')" onkeydown="tutkiKey(event, 'listaa')">
 
 <table id="listaus">
 	<thead>
@@ -25,8 +26,8 @@
 			<th>Etunimi</th>
 			<th>Sukunimi</th>
 			<th>Puhelin</th>
-			<th>Sposti</th>
-			<th>&nbsp</th>
+			<th>Sähköposti</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody id="tbody">

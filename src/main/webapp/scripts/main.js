@@ -5,36 +5,26 @@ function serialize_form(form) {
 	);
 }
 
-function haeAsiakkaat() {
-	let url = "asiakkaat?hakusana=" + document.getElementById("hakusana").value;
-	let requestOptions = {
-		method: "GET",
-		headers: { "Content-Type": "application/x-www-form-urlencoded" }
-	};
-	fetch(url, requestOptions)
-		.then(response => response.json())
-		.then(response => printItems(response))
-		.catch(errorText => console.error("Fetch failed: " + errorText));
-}
-
-function printItems(respObjList) {
-	let htmlStr = "";
-	for (let item of respObjList) {	
-		htmlStr += "<tr id='rivi_" + item.asiakas_id + "'>";
-		htmlStr += "<td>" + item.etunimi + "</td>";
-		htmlStr += "<td>" + item.sukunimi + "</td>";
-		htmlStr += "<td>" + item.puhelin + "</td>";
-		htmlStr += "<td>" + item.sposti + "</td>";
-		htmlStr += "<td><span class='poista' onclick=varmistaPoisto(" + item.asiakas_id + ",'" + encodeURI(item.etunimi) + "','" + encodeURI(item.sukunimi) + "')>Poista</span></td>";
-		//htmlStr += "<td><span class='poista' onclick=varmistaPoisto(" + item.asiakas_id + ",'" + encodeURI(item.rekno)+"')>Poista</span></td>";
-		htmlStr += "</tr>";
-	}
-	document.getElementById("tbody").innerHTML = htmlStr;
+function requestURLParam(sParam){
+    let sPageURL = window.location.search.substring(1);
+    let sURLVariables = sPageURL.split("&");
+    for (let i = 0; i < sURLVariables.length; i++){
+        let sParameterName = sURLVariables[i].split("=");
+        if(sParameterName[0] == sParam){
+            return sParameterName[1];
+        }
+    }
 }
 
 function tutkiJaLisaa() {
 	if (tutkiTiedot()) {
 		lisaaAsiakas();
+	}
+}
+
+function tutkiJaPaivita() {
+	if (tutkiTiedot()) {
+		paivitaAsiakas();
 	}
 }
 
@@ -75,51 +65,27 @@ function siivoa(teksti) {
 	return teksti;
 }
 
-function lisaaAsiakas() {
-	let formData = serialize_form(document.lomake);
-	let url = "asiakkaat";
-	let requestOptions = {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: formData
-	};
-	fetch(url, requestOptions)
-		.then(response => response.json())
-		.then(responseObj => {
-			if (responseObj.response == 0) {
-				document.getElementById("ilmo").innerHTML = "Asiakkaan lisäys epäonnistui.";
-			} else if (responseObj.response == 1) {
-				document.getElementById("ilmo").innerHTML = "Asiakkaan lisäys onnistui.";
-				document.lomake.reset();        	
-			}
-			setTimeout(function() { document.getElementById("ilmo").innerHTML = ""; }, 3000);
-		})
-		.catch(errorText => console.error("Fetch failed: " + errorText));
-}
-
 function varmistaPoisto(asiakas_id, etunimi, sukunimi) {
 	if (confirm("Poista asiakas " + decodeURI(etunimi) + " " + decodeURI(sukunimi) + "?")) {
-		poistaAsiakas(asiakas_id, encodeURI(etunimi), encodeURI(sukunimi));
+		poistaAsiakas(asiakas_id, etunimi, sukunimi);
 	}
 }
 
-function poistaAsiakas(asiakas_id, etunimi, sukunimi) {
-	let url = "asiakkaat?asiakas_id=" + asiakas_id;    
-    let requestOptions = {
-        method: "DELETE"             
-    };    
-    fetch(url, requestOptions)
-    .then(response => response.json())
-   	.then(responseObj => {	
-   		//console.log(responseObj);
-   		if(responseObj.response==0){
-			alert("Asiakkaan poisto epäonnistui.");	        	
-        }else if(responseObj.response==1){ 
-			alert("Asiakkaan " + decodeURI(etunimi) + " " + decodeURI(sukunimi) + " poisto onnistui.");
-			haeAsiakkaat();        	
-		}
-   	})
-   	.catch(errorText => console.error("Fetch failed: " + errorText));
+function asetaFocus(target) {
+	document.getElementById(target).focus();
 }
 
-
+function tutkiKey(event, target) {
+	console.log(event.keyCode);
+	if(event.keyCode==13) { //13 = Enter
+		if(target=="listaa") {
+			haeAsiakkaat();
+		} else if(target=="lisaa") {
+			tutkiJaLisaa();
+		} else if(target=="muuta") {
+			tutkiJaPaivita();
+		}
+	} else if(event.keyCode==114) {//114=F3
+		document.location="listaaasiakkaat.jsp";
+	}
+}

@@ -1,3 +1,7 @@
+body {
+	/*background-color: pink;*/
+}
+
 table {
 	font-size:  1.2em;
 	border-collapse: collapse;
@@ -23,8 +27,14 @@ th {
 }
 
 .poista {
-	color: blue;
-	text-decoration: underline blink;
+	color:#DC143C;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.muuta {
+	color: #008B8B;
+	text-decoration: underline;
 	cursor: pointer;
 }
 
