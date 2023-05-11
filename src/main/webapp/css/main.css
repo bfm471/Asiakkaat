@@ -46,6 +46,18 @@ tr:nth-child(2n+2) {
 	background-color: #e8e8ff;
 }
 
-td {
-	
+#loginDiv{
+	position: absolute;
+	border: 1px solid;
+	padding: 20px;
+	border-radius: 10px;
+	left: 35%;
+	top: 10%;
+	background-color: white;
+}
+
+label {
+	display: block;
+	width: 5em;
+	float: left;
 }
